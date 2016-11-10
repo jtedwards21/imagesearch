@@ -30,7 +30,7 @@ app.get('/latest', function (req, res) {
 })
 
 app.get('/search/:query', function (req, res) {
-  var options = m_options("cats", 10, 0);
+  var options = m_options(req.params.query, 10, 0);
 　　request(options, function(error, response, body){
 	if (!error && response.statusCode == 200) {
 	var info = JSON.parse(body);
@@ -43,7 +43,6 @@ app.get('/search/:query', function (req, res) {
 	  pics.push({"url": info[j].contentUrl, "imageUrl": info[j].thumbnailUrl, "name": info[j].name});
 	　　j = j-1;
 	}
-
 	//Place search data in database (term, when)
 	db.isearches.insert({term: req.params.query, when: Date.now()})
 
