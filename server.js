@@ -17,16 +17,6 @@ function m_options(q, count, offset){
 　　}
 }
 
-function callback(error, response, body) {
-  if (!error && response.statusCode == 200) {
-	var info = JSON.parse(body);
-	console.log(info);
-	//Place search data in database (term, when)
-	//db.isearches.insert({term: req.params.query, when: Date.now()})
-
-	//Return JSON data
-  }
-}
 
 app.get('/', function (req, res) {
   //Show the last ten searches
@@ -36,7 +26,26 @@ app.get('/', function (req, res) {
 
 app.get('/search/:query', function (req, res) {
   var options = m_options("cats", 10, 0);
-　　request(options, callback);
+　　request(options, function(error, response, body){
+	if (!error && response.statusCode == 200) {
+	var info = JSON.parse(body);
+	var pics = []
+	var j = 10;
+	
+	//Get only necessary data out of the json terms
+	info = info.value;
+	while(j > 0){
+	  pics.push({"url": info[j].contentUrl, "imageUrl": info[j].thumbnailUrl, "name": info[j].name});
+	　　j = j-1;
+	}
+
+	//Place search data in database (term, when)
+	//db.isearches.insert({term: req.params.query, when: Date.now()})
+
+	//Return JSON data
+	res.send(JSON.stringify(pics));
+  	}
+  });
 });
 
 app.listen(3000, function () {
