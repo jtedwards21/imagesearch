@@ -20,10 +20,18 @@ function m_options(q, count, offset){
 
 app.get('/latest', function (req, res) {
   db.isearches.find().sort({date: -1}, function (err, docs) {
-    // get ten of these
-    var ten = docs.slice(0,9);
-    //Send JSON data
-    res.send(JSON.stringify(ten));
+　　　　//Check for too few entries
+    var ten;
+    if(docs.length > 0 &&　docs.length < 10){
+	ten = docs.slice(0, docs.length);
+	res.send(JSON.stringify(ten));
+    }
+    else if(docs.length == 0){
+	res.send("hello world");
+    } else {
+	ten = docs.slice(0,9);
+	res.send(JSON.stringify(ten));
+    }
   });
   
   
