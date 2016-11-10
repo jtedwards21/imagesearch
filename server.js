@@ -18,10 +18,15 @@ function m_options(q, count, offset){
 }
 
 
-app.get('/', function (req, res) {
-  //Show the last ten searches
+app.get('/latest', function (req, res) {
+  db.isearches.find().sort({date: -1}, function (err, docs) {
+    // get ten of these
+    var ten = docs.slice(0,9);
+    //Send JSON data
+    res.send(JSON.stringify(ten));
+  });
   
-  res.send('Hello World!')
+  
 })
 
 app.get('/search/:query', function (req, res) {
@@ -40,7 +45,7 @@ app.get('/search/:query', function (req, res) {
 	}
 
 	//Place search data in database (term, when)
-	//db.isearches.insert({term: req.params.query, when: Date.now()})
+	db.isearches.insert({term: req.params.query, when: Date.now()})
 
 	//Return JSON data
 	res.send(JSON.stringify(pics));
