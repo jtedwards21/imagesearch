@@ -7,6 +7,13 @@ var db = mongojs("isearchdb", ["isearches"]);
 var key = "55cc5f31c4d943ebbf0d522481bab5cd";
 var query = "sushi";
 
+
+app.get('/', function(req,res){
+  res.sendFile(process.cwd() + '/public/index.html');
+});
+
+app.use('/public', express.static(process.cwd() + '/public'));
+
 function m_options(q, count, offset){
   var url = "https://api.cognitive.microsoft.com/bing/v5.0/images/search?q=" + q + "&count=1" + count + "&offset=" + offset + "&mkt=en-us&safeSearch=Moderate";
   return {
@@ -60,6 +67,4 @@ app.get('/search/:query', function (req, res) {
   });
 });
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-})
+app.listen(process.env.PORT || 5000);

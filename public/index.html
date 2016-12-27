@@ -1,0 +1,37 @@
+
+<html>
+<head>
+<link rel="stylesheet" href="public/css/bootstrap.min.css">
+<link rel="stylesheet" href="public/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="public/css/main.css">
+<script src="public/js/jquery-3.1.1.min.js"></script>
+<script src="public/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div id="content" class="container">
+  <div class="row">
+      <div id="box" class="col-md-10 col-md-offset-1">
+	<h2>Search Bing for images</h2>
+	<h3>Example Usage:</h3>
+	<code>https://imagesearch78.herokuapp.com/search/frog</code>
+
+	<h2>Output: Returns URL, image URL, and image name in JSON format</h2>
+	<h3>Example Output:</h3>
+	<code>[{"url":"http://www.bing.com/cr?IG=56A9962D89D84453BC06443A8837D3E8&CID=042DD27EA7236CE42D93DB86A6316D73&rd=1&h=NzVirImg1vKubSUGy_OAFAg941ZBFhbiAusgSVQWyHY&v=1&r=http%3a%2f%2fwww.simpsonstreetfreepress.org%2fimages%2fTree_frog.JPG&p=DevEx,5068.1","imageUrl":"https://tse3.mm.bing.net/th?id=OIP.M140cc9663d88bf4b536136df8cc7ac37o0&pid=Api","name":"SSFP: Tree Frogs - Annie Shao"}]</code>
+	<h2>See latest searches</h2>
+	<h3>Example Usage:</h3>
+	<code>https://imagesearch78.herokuapp.com/latest</code>
+
+	<h2>Output: Returns search term and unixtime of search in JSON format</h2>
+	<h3>Example Output:</h3>
+	<code>[{"_id":"586264855b002e1239581133","term":"dogs","when":1482843269268},{"_id":"586265975b002e1239581134","term":"frog","when":1482843543390}]</code>
+      </div>
+  </div>
+</div>
+
+<footer class="footer"<div class="container"><a href="https://github.com/jtedwards21/imagesearch" id="github-container"><p>Check out the code on github</p></a></div></footer>
+</body>
+<script>$("#content").css("margin-top", "100px");</script>
+</html>
